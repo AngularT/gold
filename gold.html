@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh" style="height: 100%;">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<title>Document</title>
+	<script src="js/jquery-3.1.1.min.js"></script>
+	<script src="js/fastclick.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		$(function() {  
+		    FastClick.attach(document.getElementById("bag"));  
+		});  
+	</script>
+	<script type="text/javascript">
+		$(function(){
+			var $bag=$("#bag"),
+				$bottomBox=$("#bottom-box"),
+				$dropWrap=$("#top"),
+				timer1=null,
+				winWidth=window.innerWidth,
+				winHeight=window.innerHeight-30,
+				topWidth=$("#top").width(),
+				scoreNum=$("#scoreNum");
+			//生成下落物 
+			appendDrop($dropWrap,30);
+			//下落动画
+			dropAnimate();
+			//下方篮子的移动
+			boxMove($bottomBox,$bag);
+			//下落动画
+			function dropAnimate(){
+				timer1=setInterval(function(){
+					var arr=[];
+					var _score=parseInt(scoreNum.html());
+					for(var i=0;i<30;i++){
+						arr.push(parseInt($(".drop"+i).css("top")));
+						var _top=arr[i];
+						_top++;
+						$(".drop"+i).css("top",_top+'px');
+						var newTop=parseInt($(".drop"+i).css("top"));
+						//判断drop到达底部，则remove
+						if(newTop>winHeight){
+							$(".drop"+i).remove();
+						}
+						//如果所有的drop都没了，则停掉定时器
+						if($("#top").find("span").length==0){
+							clearInterval(timer1);
+						}
+					};
+					if(_score==10){
+						clearInterval(timer1);
+						$(".drop").remove();
+						$("#success").show();
+					}else{
+						catchGold(_score);
+					}
+				},30)
+			}
+			//接金币
+			function catchGold(_score){
+				$(".drop").each(function(i){
+					var $this=$(this),
+						dropLeft=$this.offset().left,             //金币左边距
+					    dropRight=winWidth-dropLeft-$this.width(),     //金币右边距
+					    dropTop=$this.offset().top+$this.height(),     //金币上边距
+						bagTop=$bag.offset().top;                    //篮子上边距
+						bagLeft=$bag.offset().left;                  //篮子左边距
+						bagRight=winWidth-bagLeft-$bag.width();      //篮子右边距
+
+					var l=Math.round(dropLeft-bagLeft),
+						r=Math.round(dropRight-bagRight),
+						t=Math.round(dropTop-bagTop)
+					if(l>0&&r>0&&t>0){
+						$this.remove();
+						_score++;
+						scoreNum.html(_score);
+					}
+				})
+			}
+			//下方篮子的移动
+			function boxMove(bagwrap,bag){
+				bagwrap.on("touchstart",function(e){
+					var touch = e.originalEvent.targetTouches[0];
+					bag.css("left",touch.pageX-25);
+					return false;
+				})
+				bagwrap.on("touchmove",function(e){
+					var touch = e.originalEvent.targetTouches[0];
+					bag.css("left",touch.pageX-25);
+					if(touch.pageX<25){
+						bag.css("left",'0px');
+					}
+					if(touch.pageX>winWidth-28){
+						bag.css("left",(winWidth-53)+'px');
+					};
+					return false;
+				})
+			}
+			//生成下落物 
+			function appendDrop(obj,num){
+				for(var i=0;i<num;i++){
+					var oldTop=parseInt(Math.random()*50+50);
+					var $left=parseInt(Math.random()*topWidth);
+					var str="<span class='drop drop"+i+"' style='width:10px;height:10px;display:block;background:red;position:absolute'></span>"
+					obj.append(str);
+					$(".drop"+i).css("left",$left+'px');
+					$(".drop"+i).css("top",-i*oldTop+'px');
+				}
+			}
+		})
+	</script>
+	<style type="text/css">
+		*{padding: 0;margin: 0;}
+		.score{position: absolute;top: 20px;left: 20px;background: #2B669A;color: #000000;font-size: 25px;padding: 5px;}
+		#success{width: 150px;height: 40px;background: #31B0D5;color: #F0AD4E;font-size: 30px;text-align: center;
+		line-height: 40px;position: absolute;top: 50%;left: 50%;margin-left: -75px;display: none;}
+	</style>
+</head>
+<body style="height: 100%; position: relative;"> 
+	<div id="success">恭喜过关</div>
+	<div class="score">得分:<span id="scoreNum">0</span></div>
+	<div id="top" style="position: relative;width: 90%;margin: 0 auto;height: 100%;">
+		
+	</div>
+	<div id="bottom-box" style="position: absolute;bottom: 20px;width: 99%;height: 50px;border: 1px solid red;">
+		<div id="bag" style="width: 50px;height: 30px;background: #1B6D85;border-radius: 8px;position: absolute;bottom: 10px;left: 50%;"></div>
+	</div>
+</body>
+</html>
