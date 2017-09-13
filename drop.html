@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<title>Document</title>
+	<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/drop.css"/>
+	<script type="text/javascript">
+		$(function(){
+			window.requestAnimationFrame= window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+			var i=0;
+			var creatDrop=null;
+			var $bag=$("#bag"),
+				$bottomBox=$("#bottom-box"),
+				$dropWrap=$("#top"),  
+				timer1=null,
+				winWidth=window.innerWidth,
+				winHeight=window.innerHeight-30,
+				topWidth=$("#top").width(),
+				scoreNum=$("#scoreNum"),
+				successBtn=$("#success");
+				
+			
+			$(".start-game").on('click',function(){
+				appendDrop();
+				requestAnimationFrame(dropAnimate);
+				countDown(30);
+				$(this).remove();
+			});
+			boxMove($bottomBox,$bag);
+			//倒计时
+			function countDown(time){
+				var time=time;
+				var timeDown=null;
+				timeDown=setInterval(function(){
+					$(".time").html(time);
+					time--;
+					if(time<0){
+						time=0;
+						clearInterval(timeDown);
+					}
+				},1000)
+			}
+//			生成下落物
+			function appendDrop(){
+				clearInterval(creatDrop);
+				creatDrop=setInterval(function(){
+						var str="<img class='drop' src='images/1.png' style='top:0;position:absolute' />"
+						$("#top").append(str);
+						$(".drop:last").css("left",Math.random()*topWidth);
+				},1500);
+			}
+			//下落动画
+			function dropAnimate(){
+				var _score=parseInt(scoreNum.html());
+				$(".drop").each(function(){
+					var j=parseInt($(this).css('top')+Math.random()*100)
+					j++;
+					$(this).css('top',j);
+					if(j>winHeight){
+						$(this).remove();
+					}
+				})
+				catchGold(_score);  //接住下落物
+				if($('.time').html()==0){
+					window.cancelAnimationFrame(dropAnimate);
+					$('.drop').fadeOut();
+					clearInterval(creatDrop);
+					if(_score>10){
+						cjNumber=parseInt(_score/10);
+						successBtn.html('恭喜你获得'+cjNumber+'次抽奖机会');
+						successBtn.addClass('success');
+					}else{
+						successBtn.html('蠢得要死,再来一次')
+						successBtn.addClass('defult');
+					}
+					$("#success").fadeIn();
+					//分值不够抽奖，重来一次
+					$(".defult").on('click',function(){
+						location.reload() 
+		//				parent.swiper.slideNext();
+					});
+					//去抽奖||重来一次
+					$(".success").on('click',function(){
+						parent.swiper.slideNext();
+					});
+				}else{
+					requestAnimationFrame(dropAnimate);
+				}
+			};
+//			下方篮子的移动
+			function boxMove(bagwrap,bag){
+				bagwrap.on("touchstart",function(e){
+					var touch = e.originalEvent.targetTouches[0];
+					bag.css("left",touch.pageX-25);
+					return false;
+				})
+				bagwrap.on("touchmove",function(e){
+					var touch = e.originalEvent.targetTouches[0];
+					bag.css("left",touch.pageX-25);
+					if(touch.pageX<25){
+						bag.css("left",'0px');
+					}
+					if(touch.pageX>winWidth-28){
+						bag.css("left",(winWidth-53)+'px');
+					};
+					return false;
+				})
+			}
+			function catchGold(_score){
+				$(".drop").each(function(i){
+					var $this=$(this),
+						dropLeft=$this.offset().left,             //金币左边距
+					    dropRight=winWidth-dropLeft-$this.width(),     //金币右边距
+					    dropTop=$this.offset().top+$this.height(),     //金币上边距
+						bagTop=$bag.offset().top;                    //篮子上边距
+						bagLeft=$bag.offset().left;                  //篮子左边距
+						bagRight=winWidth-bagLeft-$bag.width();      //篮子右边距
+					var l=Math.round(dropLeft-bagLeft),
+						r=Math.round(dropRight-bagRight),
+						t=Math.round(dropTop-bagTop)
+					if(l>0&&r>0&&t>0){
+						$this.remove();
+						_score++;
+						scoreNum.html(_score);
+					}
+				})
+			}
+			
+			
+		})
+		
+	</script>
+</head>
+<body style="height: 100%; position: relative;">
+	<button class="start-game">开始游戏</button>
+	<button id="success" class="slide-next"></button>
+	<div class="score">得分:<span id="scoreNum">0</span></div>
+	<div class="time-wrap" style="position: absolute;">剩余时间：<span class="time">30</span></div>
+	<div id="top" style="position: relative;width: 90%;margin: 0 auto;height: 100%;">
+		<!--生成鸡翅-->
+	</div>
+	<div id="bottom-box" style="position: absolute;bottom: 20px;width: 99%;height: 50px;border: 1px solid red;">
+		<div id="bag" style="width: 50px;height: 30px;background: #1B6D85;border-radius: 8px;position: absolute;bottom: 10px;left: 50%;"></div>
+	</div>
+	<!--<script src="js/index.js" type="text/javascript" charset="utf-8"></script>-->
+</body>
+</html>

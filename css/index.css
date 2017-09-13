@@ -1,0 +1,91 @@
+    html, body {
+        position: relative;
+        height: 100%;
+    }
+    body {
+        background: #eee;
+        font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        color:#000;
+        margin: 0;
+        padding: 0;
+    }
+    .swiper-container {
+        width: 100%;
+        height: 100%;
+    }
+    .swiper-slide {
+        text-align: center;
+        font-size: 18px;
+        background: #fff;
+
+        /* Center slide text vertically */
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+    }
+    
+/*index*/
+.slide-next{
+	width: 30%;
+	height:80px;
+	border-radius: 50%;
+	position: absolute;
+	bottom: 30px;
+	left: 35%;
+}
+.maplebg{position: relative;}
+.maple { 
+  position: absolute;
+  top: 0; 
+  color: #ff0000;
+  animation: rotate 12s linear infinite;
+}
+@keyframes rotate{
+	from{}
+	to{transform: rotate(270deg);}
+}
+.pace-progress{position: relative;}
+.pace-progress:before{content:"";width: 30px;height: 30px;position: absolute;top: 20px;right: 10px;background: #007AFF;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

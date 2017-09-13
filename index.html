@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="css/swiper.min.css"/>
+		<link rel="stylesheet" type="text/css" href="css/index.css"/>
+		<title>联想&肯德基</title>
+		<script src="js/pace.min.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="css/pace-theme-center-simple.css"/>
+	</head>
+	<body>
+		<div class="swiper-container">
+       	 	<div class="swiper-wrapper">
+	            <div class="swiper-slide">
+	            	<div style="width: 100%;height: 100%;position: relative;">
+	            		<div class="maplebg"></div>
+	            		<button class="slide-next">点击开始</button>
+	            	</div>
+	            </div>
+	            <div class="swiper-slide">
+	            	<iframe src="drop.html" width="100%" height="100%" frameborder="0"></iframe>
+	            </div>
+	            <div class="swiper-slide">
+	            	<iframe src="turntable.html" width="100%" height="100%" frameborder="0"></iframe>
+	            </div>
+	            <div class="swiper-slide">
+	            	4
+	            </div>
+        	</div>
+       </div>
+       <script src="js/jquery-3.1.1.min.js"></script>
+       <script src="js/index.js"></script>
+       <script src="js/swiper.min.js"></script>
+       <script type="text/javascript">
+			var swiper = new Swiper('.swiper-container', {
+		        pagination: '.swiper-pagination',
+		        paginationClickable: true,
+		        direction: 'vertical',
+		        allowSwipeToPrev : false     //禁止上滑
+		    });
+		    var cjNumber=0;                      //抽奖次数
+       </script>
+	</body>
+</html>

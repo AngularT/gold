@@ -1,0 +1,40 @@
+* {
+	padding: 0;
+	margin: 0;
+}
+html,body{height: 100%;}
+.score {
+	position: absolute;
+	top: 20px;
+	left: 20px;
+	background: #2B669A;
+	color: #000000;
+	font-size: 25px;
+	padding: 5px;
+}
+
+#success {
+	width: 50%;
+	height: 40px;
+	background: #31B0D5;
+	color: #F0AD4E;
+	font-size: 15px;
+	text-align: center;
+	line-height: 40px;
+	position: absolute;
+	top: 50%;
+	left: 25%;
+	display: none;
+	z-index: 99;
+}
+.start-game{
+	width: 30%;
+	height:80px;
+	border:none;
+	border-radius: 50%;
+	position: absolute;
+	top: 40%;
+	left: 35%;
+	z-index: 99;
+}
+
