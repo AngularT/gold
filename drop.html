@@ -24,10 +24,11 @@
 				
 			
 			$(".start-game").on('click',function(){
+				alert(222)
+				$(this).remove();
 				appendDrop();
 				requestAnimationFrame(dropAnimate);
 				countDown(30);
-				$(this).remove();
 			});
 			boxMove($bottomBox,$bag);
 			//倒计时
