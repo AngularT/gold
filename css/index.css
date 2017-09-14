@@ -115,7 +115,7 @@
 
 .model-person{width: 1.23rem;height: 2.19rem;position: absolute;bottom: 0.39rem;left: 0;background-image: url(../images/p1-ren_02.png);background-size: 100% 100%;z-index: 10;opacity: 0;}
 
-.model-word{width: 0;height:0.77rem;position: absolute;bottom: 2.35rem;left: 0.78rem;overflow: hidden;animation: wordShow .5s 4.5s linear;-webkit-animation-fill-mode: forwards;animation-fill-mode: forwards;}
+.model-word{width: 0;height:0.77rem;position: absolute;bottom: 2.35rem;left: 0.78rem;overflow: hidden;-webkit-animation-fill-mode: forwards;animation-fill-mode: forwards;}
 .model-word img{width: 1.26rem;height:0.77rem;}
 @keyframes wordShow{
 	from{width: 0;}

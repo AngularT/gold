@@ -20,7 +20,13 @@ $(function(){
 				overLeg.eq(5).addClass('mt-leg over6 animated shake')
 			},2500)
 			setTimeout(function(){
-				$(".model-person").addClass('animated slideInLeft')
+				$(".model-person").addClass('animated slideInLeft');
+				setTimeout(function(){
+					$(".model-word").css({
+						'animation':'wordShow .3s linear',
+						'animation-fill-mode':'forwards'
+					})
+				},1000)
 			},3000)
 		}
 	},100)
@@ -32,7 +38,7 @@ $(function(){
 			},500)
 		})
 		clearTimeout(nextbtnShow1);
-	},5500)
+	},6000)
 	
 //	function dropLeg(){
 //		var d = "<div class='maple'>🍁<div>";
