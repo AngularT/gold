@@ -3,19 +3,38 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>联想&肯德基</title>
 		<link rel="stylesheet" href="css/swiper.min.css"/>
 		<link rel="stylesheet" type="text/css" href="css/index.css"/>
-		<title>联想&肯德基</title>
+		<link rel="stylesheet" type="text/css" href="css/animate.min.css"/>
 		<script src="js/pace.min.js" type="text/javascript" charset="utf-8"></script>
-		<link rel="stylesheet" type="text/css" href="css/pace-theme-center-simple.css"/>
+		<script type="text/javascript">
+		    function initScale(){
+			    var iWidth=document.documentElement.getBoundingClientRect().width;
+			    iWidth=iWidth>640?640:iWidth;
+			    document.getElementsByTagName("html")[0].style.fontSize=iWidth/3.2+"px";
+		    }
+		    window.onresize=function(){
+		        initScale();
+		    }
+		    initScale();
+		</script>
 	</head>
 	<body>
 		<div class="swiper-container">
        	 	<div class="swiper-wrapper">
 	            <div class="swiper-slide">
-	            	<div style="width: 100%;height: 100%;position: relative;">
-	            		<div class="maplebg"></div>
-	            		<button class="slide-next">点击开始</button>
+	            	<div  class="model-index" style="width: 100%;height: 100%;position: relative;">
+	            		<div class="model-tong">
+	            			<img class="mt-leg mt-leg1" src="images/page1_leg (1).png" width="46" height="57" alt=""/>
+	            			<img class="mt-leg mt-leg2" src="images/page1_leg (3).png" width="48" height="64" alt=""/>
+	            			<img class="mt-leg mt-leg3" src="images/page1_leg (2).png" width="65" height="48" alt=""/>
+	            			<img class="mt-leg mt-leg4" src="images/page1_leg (4).png" width="38" height="67" alt=""/>
+	            			<img class="mt-leg mt-leg5" src="images/page1_leg (6).png" width="36" height="51" alt=""/>
+	            			<img class="mt-leg mt-leg6" src="images/page1_leg (5).png" width="39" height="40" alt=""/>
+	            			<!--<div class="maplebg"></div>-->
+	            		</div>
+	            		<div class="slide-next"></div>
 	            	</div>
 	            </div>
 	            <div class="swiper-slide">
