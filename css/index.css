@@ -35,6 +35,7 @@
     }
     /*进度条*/
     /* This is a compiled file, you should be editing the file in the templates directory */
+   #body{width: 100%;height: 100%;background-image: url(../images/p0-bg.jpg);background-size: 100% 100%;}
 .pace {
   -webkit-pointer-events: none;
   pointer-events: none;
@@ -42,7 +43,6 @@
   -webkit-user-select: none;
   -moz-user-select: none;
   user-select: none;
-
   z-index: 9999;
   position: fixed;
   margin: auto;
@@ -50,47 +50,61 @@
   left: 0;
   right: 0;
   bottom: 0;
-  height: 5px;
-  width: 200px;
-  background: #fff;
-  border: 1px solid #ee3148;
-
-  overflow: hidden;
+  height:0.26rem;
+  width: 3.14rem;
+  background: #89e3fe;
+  /*overflow: hidden;*/
+  border-radius: 12px;
+  border: 1px solid #000;
 }
-
 .pace .pace-progress {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   -ms-box-sizing: border-box;
   -o-box-sizing: border-box;
   box-sizing: border-box;
-
-  -webkit-transform: translate3d(0, 0, 0);
-  -moz-transform: translate3d(0, 0, 0);
-  -ms-transform: translate3d(0, 0, 0);
-  -o-transform: translate3d(0, 0, 0);
-  transform: translate3d(0, 0, 0);
-
-  max-width: 200px;
   position: fixed;
   z-index: 9999;
   display: block;
   position: absolute;
   top: 0;
-  right: 100%;
-  height: 100%;
+  height:0.24rem;
   width: 100%;
-  background: #ee3148;
+  max-width: 3.14rem;
+  background-color: #fff;
+  border-radius: 12px;
 }
-
-.pace.pace-inactive {
+.pace .pace-progress:after{
+	content: "";
+	width: 0.69rem;
+	height: 0.93rem;
+	background-image:url(../images/p0-person_03.png);
+	background-size: 100% 100%;
+	position: absolute;
+	right: -0.2rem;
+	top: -0.7rem;
+	z-index: 99999;
+}
+.pace.pace-inactive,.pace-over{
   display: none;
 }
-/*进度条样式*/
-.pace-progress{position: relative;}
-.pace-progress:before{content:"";width: 30px;height: 30px;position: absolute;top: 20px;right: 10px;background: #007AFF;}
-
-    
+.pace-progress-inner{
+  height: 100%;
+  width: 100%;
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+}
+.pace-progress-inner:after{
+	content: "";
+	 height: 100%;
+	 width: 3.14rem;
+	 position: absolute;
+	 border-radius: 12px;
+	 z-index: 99999;
+	 background-image: url(../images/p0-loding_03.jpg);
+	 background-size: 100% 100%;
+}
 /*index*/
 .slide-next{
 	width: 1.62rem;
@@ -109,9 +123,7 @@
 .model-index{background-image: url(../images/p1-bg.jpg);background-position: top;background-size: 100% 100%;background-repeat: no-repeat;}
 .model-title{width:3.68rem;height: 1.56rem;background-image: url(../images/p1-title_03.png);background-size: 100% 100%;position: absolute;top: 0.08rem;left: 0.05rem;opacity: 0;}
 
-
 .model-yun{width: 100%;height: 2.52rem;position: absolute;bottom: 0;left: 0;background-image: url(../images/p1-bottom_02.png);background-size: 100% 100%;opacity: 0;}
-
 
 .model-person{width: 1.23rem;height: 2.19rem;position: absolute;bottom: 0.39rem;left: 0;background-image: url(../images/p1-ren_02.png);background-size: 100% 100%;z-index: 10;opacity: 0;}
 
@@ -226,174 +238,7 @@ animation-fill-mode: forwards;}
 	to{top:3.2rem;right:0.8rem;opacity: 1;}
 }
 
-/*动画*/
-.animated {
-	-webkit-animation-duration: 1s;
-	animation-duration: 1s;
-	-webkit-animation-fill-mode: forwards;
-	animation-fill-mode: forwards;
-}
-@-webkit-keyframes fadeInDown {
-	0% {
-		opacity: 0;
-		-webkit-transform: translate3d(0, -100%, 0);
-		transform: translate3d(0, -100%, 0)
-	}
-	100% {
-		opacity: 1;
-		-webkit-transform: none;
-		transform: none
-	}
-}
 
-@keyframes fadeInDown {
-	0% {
-		opacity: 0;
-		-webkit-transform: translate3d(0, -100%, 0);
-		-ms-transform: translate3d(0, -100%, 0);
-		transform: translate3d(0, -100%, 0)
-	}
-	100% {
-		opacity: 1;
-		-webkit-transform: none;
-		-ms-transform: none;
-		transform: none
-	}
-}
-
-.fadeInDown {
-	-webkit-animation-name: fadeInDown;
-	animation-name: fadeInDown
-}
-
-@-webkit-keyframes fadeInUp {
-	0% {
-		opacity: 0;
-		-webkit-transform: translate3d(0, 100%, 0);
-		transform: translate3d(0, 100%, 0)
-	}
-	100% {
-		opacity: 1;
-		-webkit-transform: none;
-		transform: none
-	}
-}
-
-@keyframes fadeInUp {
-	0% {
-		opacity: 0;
-		-webkit-transform: translate3d(0, 100%, 0);
-		-ms-transform: translate3d(0, 100%, 0);
-		transform: translate3d(0, 100%, 0)
-	}
-	100% {
-		opacity: 1;
-		-webkit-transform: none;
-		-ms-transform: none;
-		transform: none
-	}
-}
-
-.fadeInUp {
-	-webkit-animation-name: fadeInUp;
-	animation-name: fadeInUp
-}
-
-@-webkit-keyframes shake {
-	0%,
-	80%,
-	90%,
-	100% {
-		-webkit-transform: translate3d(0, 0, 0);
-		-ms-transform: translate3d(0, 0, 0);
-		transform: translate3d(0, 0, 0)
-	}
-	10%,
-	30%,
-	50%,
-	70%{
-		-webkit-transform: translate3d(-3px, 0, 0);
-		-ms-transform: translate3d(-3px, 0, 0);
-		transform: translate3d(-3px, 0, 0)
-	}
-	20%,
-	40%,
-	60%{
-		-webkit-transform: translate3d(3px, 0, 0);
-		-ms-transform: translate3d(3px, 0, 0);
-		transform: translate3d(3px, 0, 0)
-	}
-}
-
-@keyframes shake {
-	0%,
-	80%,
-	90%,
-	100% {
-		-webkit-transform: translate3d(0, 0, 0);
-		-ms-transform: translate3d(0, 0, 0);
-		transform: translate3d(0, 0, 0)
-	}
-	10%,
-	30%,
-	50%,
-	70%{
-		-webkit-transform: translate3d(-3px, 0, 0);
-		-ms-transform: translate3d(-3px, 0, 0);
-		transform: translate3d(-3px, 0, 0)
-	}
-	20%,
-	40%,
-	60%{
-		-webkit-transform: translate3d(3px, 0, 0);
-		-ms-transform: translate3d(3px, 0, 0);
-		transform: translate3d(3px, 0, 0)
-	}
-}
-
-.shake {
-	-webkit-animation-name: shake;
-	animation-name: shake;
-	animation-iteration-count:infinite;
-	-webkit-animation-iteration-count:infinite;
-}
-
-@keyframes slideInLeft {
-  from {
-    transform: translate3d(-100%, 0, 0);
-    visibility: visible;
-    opacity: 1;
-  }
-
-  to {
-  	opacity: 1;
-    transform: translate3d(0, 0, 0);
-  }
-}
-
-.slideInLeft {
-  animation-name: slideInLeft;
-}
-
-@keyframes flash {
-  0%,
-  20%,
-  50%,
-  to{opacity: 1;}
-  
-  10%,
-  30%{opacity: 0;}
-}
-
-.flash {
--webkit-animation-duration: 2s;
-animation-duration:2s;
--webkit-animation-fill-mode: forwards;
-animation-fill-mode: forwards;
-animation-name: flash;
-animation-iteration-count:3;
--webkit-animation-iteration-count:3;
-}
 
 
 

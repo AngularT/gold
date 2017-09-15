@@ -1,0 +1,24 @@
+<html>  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1">  
+    <title>Zero Clipboard Test</title>  
+</script>  
+</head>  
+<body>  
+   <script type="text/javascript">   
+    function jsCopy(){   
+        var e=document.getElementById("contents");//对象是contents   
+        e.select(); //选择对象   
+        tag=document.execCommand("Copy"); //执行浏览器复制命令  
+        if(tag){  
+          alert('复制内容成功');  
+        }  
+    }   
+  
+</script>   
+<textarea id="contents" cols="40" rows="5">sdafsdfsadf</textarea>  
+<br />  
+<input type="button" onClick="jsCopy();" value="复制" />  
+</body>  
+</html>  

@@ -1,8 +1,51 @@
-* {
-	padding: 0;
-	margin: 0;
-}
 html,body{height: 100%;}
+.model-mask{
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0,0,0,.5);
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 999;
+}
+.model-mask .rules{
+	width: 2.87rem;
+	height: 2.92rem;
+	position: absolute;
+	top: 1.57rem;
+	left: 0.42rem;
+}
+.model-mask .gameOver{
+	width: 3.07rem;
+	height: 2.09rem;
+	position: absolute;
+	top: 2.34rem;
+	left: 0.31rem;
+	background-image: url(../images/p2-win_03.png);
+	background-size: 100% 100%;
+}
+.model-mask .again,
+.model-mask .goNext{
+	width: 1rem;
+	height: 0.4rem;
+	position: absolute;
+	top: 1.3rem;
+}
+.model-mask .text{
+	width: 1.76rem;
+	line-height: 0.3rem;
+	font-size: 0.15rem;
+	position: absolute;
+	top: 0.5rem;
+	left: 0.67rem;
+}
+.model-mask .again{
+	left: 0.34rem;
+}
+.model-mask .goNext{
+	left: 1.81rem;
+}
 .score {
 	position: absolute;
 	top: 20px;
@@ -12,29 +55,100 @@ html,body{height: 100%;}
 	font-size: 25px;
 	padding: 5px;
 }
-
-#success {
-	width: 50%;
-	height: 40px;
-	background: #31B0D5;
-	color: #F0AD4E;
-	font-size: 15px;
+.top-time{
+	width: 2.27rem;
+	height: 0.92rem;
+	background-image: url(../images/p2-time_02.png);
+	background-size: 100% 100%;
+	position: absolute;
+	top: 0;
+	left: 0.72rem;
+	opacity: 0;
+}
+#scoreNum,.time{
+	position: absolute;
+	font-size: 0.2rem;
+	display: block;
+	width: 0.3rem;
 	text-align: center;
-	line-height: 40px;
+}
+#scoreNum{
+    left: 0.5rem;
+    top: 0.55rem;
+}
+.time{
+    left: 1.6rem;
+    top: 0.55rem;
+}
+.bottom{
+	opacity: 0;
+	width: 100%;
+	height: 3.02rem;
 	position: absolute;
-	top: 50%;
-	left: 25%;
+	bottom: 0;
+	left: 0;
+}
+.model-person,
+.model-startBtn,
+.model-yun,
+.model-qiu{
+	background-size: 100% 100%;
+	position: absolute;
+}
+.model-person{
+	width: 1.21rem;
+	height: 1.37rem;
+	background-image: url(../images/p2-person_03.png);
+	bottom: 1.65rem;
+	left: 1.27rem;
+}
+.model-startBtn{
+	width: 1.62rem;
+	height:0.68rem;
+	background-image: url(../images/p2-btn_03.png);
+	bottom: 0.94rem;
+	left: 1.08rem;
+	z-index: 10;
+}
+.model-yun{
+	width: 100%;
+	height: 1.15rem;
+	background-image: url(../images/p2-rules_02.png);
+	bottom: 0;
+	left: 0;
+}
+.model-qiu{
+	width: 0.34rem;
+	height: 0.46rem;
+	background-image: url(../images/p2-qiu_03.png);
+	bottom: 1.01rem;
+	right: 0.43rem;
+	z-index: 10;
+}
+
+#bag{
+	width: 1.21rem;
+	height: 1.39rem;
+	position: absolute;
+	bottom: 0.05rem;
+	left: 33%;
 	display: none;
-	z-index: 99;
 }
-.start-game{
-	width: 30%;
-	height:80px;
-	border:none;
-	border-radius: 50%;
-	position: absolute;
-	top: 40%;
-	left: 35%;
-	z-index: 99;
+#top{
+	position: relative;
+	width:2.7rem;
+	margin: 0 auto;
+	height: 100%;
 }
+#top .drop{
+	z-index: 99;
+	top:0.9rem;
+	position:absolute;
+	width: 35px;
+}
+#top .person{
+	width: 40px;
+}
+
+
 

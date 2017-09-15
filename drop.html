@@ -5,10 +5,28 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
 	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
 	<title>Document</title>
-	<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/reset.css"/>
 	<link rel="stylesheet" type="text/css" href="css/drop.css"/>
+	<script src="js/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript">
+		    function initScale(){
+			    var iWidth=document.documentElement.getBoundingClientRect().width;
+			    iWidth=iWidth>750?750:iWidth;
+			    document.getElementsByTagName("html")[0].style.fontSize=iWidth/3.75+"px";
+		    }
+		    window.onresize=function(){
+		        initScale();
+		    }
+		    initScale();
+		</script>
 	<script type="text/javascript">
 		$(function(){
+			var nextpage=setInterval(function(){
+				if(parent.nextpage==1){
+					$(".top-time").addClass('animated slideInDown')
+					clearInterval(nextpage)
+				}
+			},300)
 			window.requestAnimationFrame= window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
 			var i=0;
 			var creatDrop=null;
@@ -20,17 +38,28 @@
 				winHeight=window.innerHeight-30,
 				topWidth=$("#top").width(),
 				scoreNum=$("#scoreNum"),
-				successBtn=$("#success");
-				
-			
+				successBtn=$("#success"),
+				$mask=$('.model-mask');
+			var arr=["<img class='drop' src='images/p1-tui1_03.png'/>",
+				"<img class='drop' src='images/p1-tui2_03.png'/>",
+				"<img class='drop' src='images/p1-tui3_03.png'/>",
+				"<img class='drop' src='images/p1-tui6_03.png'/>",
+				"<img class='drop' src='images/p1-tui4_03.png'/>",
+				"<img class='drop' src='images/p1-tui5_03.png'/>",
+				"<img class='drop person' src='images/p2-dropPerson_03.png'/>",
+				"images/ban.gif",
+				"images/man.gif"
+				]
 			$(".start-game").on('click',function(){
 				appendDrop();
 				requestAnimationFrame(dropAnimate);
 				countDown(30);
-				$(this).remove();
+				$(".bottom").hide();
+				$("#bag").fadeIn(1000)
 			});
 			boxMove($bottomBox,$bag);
 			//倒计时
+			
 			function countDown(time){
 				var time=time;
 				var timeDown=null;
@@ -47,7 +76,8 @@
 			function appendDrop(){
 				clearInterval(creatDrop);
 				creatDrop=setInterval(function(){
-						var str="<img class='drop' src='images/1.png' style='top:0;position:absolute' />"
+						var i=parseInt(Math.random()*7);
+						var str=arr[i];
 						$("#top").append(str);
 						$(".drop:last").css("left",Math.random()*topWidth);
 				},1500);
@@ -65,86 +95,141 @@
 				})
 				catchGold(_score);  //接住下落物
 				if($('.time').html()==0){
-					window.cancelAnimationFrame(dropAnimate);
-					$('.drop').fadeOut();
-					clearInterval(creatDrop);
-					if(_score>10){
-						cjNumber=parseInt(_score/10);
-						successBtn.html('恭喜你获得'+cjNumber+'次抽奖机会');
-						successBtn.addClass('success');
-					}else{
-						successBtn.html('蠢得要死,再来一次')
-						successBtn.addClass('defult');
-					}
-					$("#success").fadeIn();
-					//分值不够抽奖，重来一次
-					$(".defult").on('click',function(){
-						location.reload() 
-		//				parent.swiper.slideNext();
-					});
-					//去抽奖||重来一次
-					$(".success").on('click',function(){
-						parent.swiper.slideNext();
-					});
+					timeOver(_score)
 				}else{
 					requestAnimationFrame(dropAnimate);
 				}
 			};
+			//时间停止后
+			function timeOver(_score){
+					window.cancelAnimationFrame(dropAnimate);
+					$('.drop').hide();
+					
+					clearInterval(creatDrop);
+					if(_score>10){
+						cjNumber=parseInt(_score/10);
+						var strRule='<div class="gameOver"><p class="text"></p><img class="again" src="images/p2-winBtn_06.png"/><img class="goNext" src="images/p2-winBtn_03.png"/></div>';
+						$mask.show().append(strRule);
+						$(".model-mask .text").html('厉害了！你获得了'+_score+'个鸡翅分值，可以参与'+cjNumber+'次抽奖')
+						$(".goNext").on('click',function(){
+							parent.swiper.slideNext()
+						});
+						$(".again").on('click',function(){
+							location.reload() 
+						});
+					}else{
+						var strRule='<div class="gameOver"><p class="text"></p><img class="again" src="images/p2-winBtn_06.png"/></div>';
+						$mask.show().append(strRule);
+						$(".model-mask .text").html('手残党，你只获得了'+_score+'个鸡翅分值，再玩一次？')
+						$(".again").on('click',function(){
+							location.reload() 
+						}).css('left','1.07rem');
+					}
+//					$("#success").fadeIn();
+//					//分值不够抽奖，重来一次
+//					$(".defult").on('click',function(){
+//						location.reload() 
+//		//				parent.swiper.slideNext();
+//					});
+//					//去抽奖||重来一次
+//					$(".success").on('click',function(){
+//						parent.swiper.slideNext();
+//					});
+			}
 //			下方篮子的移动
 			function boxMove(bagwrap,bag){
 				bagwrap.on("touchstart",function(e){
 					var touch = e.originalEvent.targetTouches[0];
-					bag.css("left",touch.pageX-25);
+					bag.css("left",touch.pageX-60);
+					if(touch.pageX<90){
+						bag.css("left",'0.3rem');
+					}
+					if(touch.pageX>282){
+						bag.css("left",'2.2rem');
+					};
 					return false;
 				})
 				bagwrap.on("touchmove",function(e){
 					var touch = e.originalEvent.targetTouches[0];
-					bag.css("left",touch.pageX-25);
-					if(touch.pageX<25){
-						bag.css("left",'0px');
+					bag.css("left",touch.pageX-60);
+					console.log(touch.pageX)
+					if(touch.pageX<90){
+						bag.css("left",'0.3rem');
 					}
-					if(touch.pageX>winWidth-28){
-						bag.css("left",(winWidth-53)+'px');
+					if(touch.pageX>282){
+						bag.css("left",'2.2rem');
 					};
 					return false;
 				})
 			}
 			function catchGold(_score){
+				if(_score==1){
+					$("#bag").find('img').attr('src',arr[7])
+				}else if(_score>10){
+					$("#bag").find('img').attr('src',arr[8])
+				}
 				$(".drop").each(function(i){
 					var $this=$(this),
 						dropLeft=$this.offset().left,             //金币左边距
 					    dropRight=winWidth-dropLeft-$this.width(),     //金币右边距
 					    dropTop=$this.offset().top+$this.height(),     //金币上边距
-						bagTop=$bag.offset().top;                    //篮子上边距
-						bagLeft=$bag.offset().left;                  //篮子左边距
+						bagTop=$bag.offset().top+40;                    //篮子上边距
+						bagLeft=$bag.offset().left+30;                  //篮子左边距
 						bagRight=winWidth-bagLeft-$bag.width();      //篮子右边距
 					var l=Math.round(dropLeft-bagLeft),
 						r=Math.round(dropRight-bagRight),
 						t=Math.round(dropTop-bagTop)
 					if(l>0&&r>0&&t>0){
-						$this.remove();
-						_score++;
-						scoreNum.html(_score);
+						if($(this).hasClass('person')){
+							$this.remove();
+							_score+=6;
+							scoreNum.html(_score);
+						}else{
+							$this.remove();
+							_score++;
+							scoreNum.html(_score);
+						}
+						
 					}
 				})
 			}
-			
-			
 		})
-		
 	</script>
 </head>
-<body style="height: 100%; position: relative;">
-	<button class="start-game">开始游戏</button>
-	<button id="success" class="slide-next"></button>
-	<div class="score">得分:<span id="scoreNum">0</span></div>
-	<div class="time-wrap" style="position: absolute;">剩余时间：<span class="time">30</span></div>
-	<div id="top" style="position: relative;width: 90%;margin: 0 auto;height: 100%;">
+<body style="height: 100%; position: relative;background-image: url(images/p2-bg.jpg); background-size: 100% 100%;">
+	<div class="model-mask"></div>
+	<div class="top-time">
+		<span id="scoreNum">0</span>
+		<span class="time">30</span>
+	</div>
+	<!--<button class="start-game"><img src="images/"/></button>-->
+	<!--<button id="success" class="slide-next"></button>-->
+	<div id="top" style="">
 		<!--生成鸡翅-->
 	</div>
-	<div id="bottom-box" style="position: absolute;bottom: 20px;width: 99%;height: 50px;border: 1px solid red;">
-		<div id="bag" style="width: 50px;height: 30px;background: #1B6D85;border-radius: 8px;position: absolute;bottom: 10px;left: 50%;"></div>
+	<div id="bottom-box" style="position: absolute;bottom: 0.6rem;width: 99%;height: 50px;">
+		<div id="bag">
+			<img src="images/perKong.gif"/>
+		</div>
 	</div>
-	<!--<script src="js/index.js" type="text/javascript" charset="utf-8"></script>-->
+	<div class="bottom">
+		<div class=" model-qiu"></div>
+		<div class=" model-person"></div>
+		<div class=" model-startBtn start-game"></div>
+		<div class=" model-yun"></div>
+	</div>
+	<script type="text/javascript">
+		document.getElementsByClassName('top-time')[0].addEventListener('animationstart',function(){
+			$('.bottom').addClass('animated slideInUp')
+		})
+		$(".model-yun").on('click',function(){
+			var strRule='<img class="rules" src="images/p2-rules_03.png">';
+			$(".model-mask").show().addClass('ruleBg').append(strRule);
+		})
+		$(".model-mask").on('click',function(){
+			$(this).html("").hide();
+		})
+			
+	</script>
 </body>
 </html>
