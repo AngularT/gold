@@ -48,7 +48,11 @@
 				"<img class='drop' src='images/p1-tui5_03.png'/>",
 				"<img class='drop person' src='images/p2-dropPerson_03.png'/>",
 				"images/ban.gif",
-				"images/man.gif"
+				"images/man.gif",
+				"images/p2-rules_03.png",
+				"images/p2-win_03.png",
+				"images/p2-winBtn_06.png",
+				"images/p2-winBtn_03.png"
 				]
 			$(".start-game").on('click',function(){
 				appendDrop();
@@ -108,7 +112,7 @@
 					clearInterval(creatDrop);
 					if(_score>10){
 						cjNumber=parseInt(_score/10);
-						var strRule='<div class="gameOver"><p class="text"></p><img class="again" src="images/p2-winBtn_06.png"/><img class="goNext" src="images/p2-winBtn_03.png"/></div>';
+						var strRule='<div class="gameOver" style="background-image: url('+arr[10]+');"><p class="text"></p><img class="again" src="'+arr[11]+'"/><img class="goNext" src="'+arr[12]+'"/></div>';
 						$mask.show().append(strRule);
 						$(".model-mask .text").html('厉害了！你获得了'+_score+'个鸡翅分值，可以参与'+cjNumber+'次抽奖')
 						$(".goNext").on('click',function(){
@@ -118,7 +122,7 @@
 							location.reload() 
 						});
 					}else{
-						var strRule='<div class="gameOver"><p class="text"></p><img class="again" src="images/p2-winBtn_06.png"/></div>';
+						var strRule='<div class="gameOver" style="background-image: url('+arr[10]+');"><p class="text"></p><img class="again" src="'+arr[11]+'"/></div>';
 						$mask.show().append(strRule);
 						$(".model-mask .text").html('手残党，你只获得了'+_score+'个鸡翅分值，再玩一次？')
 						$(".again").on('click',function(){
@@ -152,7 +156,7 @@
 				bagwrap.on("touchmove",function(e){
 					var touch = e.originalEvent.targetTouches[0];
 					bag.css("left",touch.pageX-60);
-					console.log(touch.pageX)
+//					console.log(touch.pageX)
 					if(touch.pageX<90){
 						bag.css("left",'0.3rem');
 					}
@@ -189,10 +193,22 @@
 							_score++;
 							scoreNum.html(_score);
 						}
-						
 					}
 				})
 			}
+			
+			$(".model-yun").on('click',function(){
+			var strRule='<img class="rules" src="'+arr[9]+'">';
+			$(".model-mask").show().addClass('ruleBg').append(strRule);
+			})
+			$(".model-mask").on('click',function(event){
+				var x=event.target;
+//				console.log(x.className)
+				if(x.className=='model-mask ruleBg'){
+					$(this).html("").removeClass('ruleBg').hide();
+				}
+				
+			})
 		})
 	</script>
 </head>
@@ -221,13 +237,6 @@
 	<script type="text/javascript">
 		document.getElementsByClassName('top-time')[0].addEventListener('animationstart',function(){
 			$('.bottom').addClass('animated slideInUp')
-		})
-		$(".model-yun").on('click',function(){
-			var strRule='<img class="rules" src="images/p2-rules_03.png">';
-			$(".model-mask").show().addClass('ruleBg').append(strRule);
-		})
-		$(".model-mask").on('click',function(){
-			$(this).html("").hide();
 		})
 			
 	</script>

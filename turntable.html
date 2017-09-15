@@ -4,6 +4,7 @@
 	<meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>大转盘活动</title>
+<link rel="stylesheet" type="text/css" href="css/reset.css"/>
 <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
 <script type="text/javascript" src="js/awardRotate.js"></script>
 <script type="text/javascript">
@@ -105,7 +106,7 @@ $(document).ready(function(){
 				rotateFn(288, turnplate.restaraunts[9]);
 				break;
 		} */
-		console.log(item);
+//		console.log(item);
 	});
 });
 
@@ -141,6 +142,7 @@ function drawRouletteWheel() {
 		  //arc(x,y,r,起始角,结束角,绘制方向) 方法创建弧/曲线（用于创建圆或部分圆）    
 		  ctx.arc(211, 211, turnplate.outsideRadius, angle, angle + arc, false);    
 		  ctx.arc(211, 211, turnplate.insideRadius, angle + arc, angle, true);
+		  ctx.strokeStyle='blue';
 		  ctx.stroke();  
 		  ctx.fill();
 		  //锁画布(为了保存之前的画布状态)
@@ -256,13 +258,9 @@ function drawRouletteWheel() {
 			}
 
 		}
-		
-		
 //		setInterval(function(){
 //			
 //		},30)
-		
-		
 	</script>
 </body>
 </html>
