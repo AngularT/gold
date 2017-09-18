@@ -91,7 +91,7 @@
 				var _score=parseInt(scoreNum.html());
 				$(".drop").each(function(){
 					var j=parseInt($(this).css('top')+Math.random()*100)
-					j++;
+					j+=2;
 					$(this).css('top',j);
 					if(j>winHeight){
 						$(this).remove();
@@ -111,10 +111,10 @@
 					
 					clearInterval(creatDrop);
 					if(_score>10){
-						cjNumber=parseInt(_score/10);
+						parent.cjNumber=parseInt(_score/10);
 						var strRule='<div class="gameOver" style="background-image: url('+arr[10]+');"><p class="text"></p><img class="again" src="'+arr[11]+'"/><img class="goNext" src="'+arr[12]+'"/></div>';
 						$mask.show().append(strRule);
-						$(".model-mask .text").html('厉害了！你获得了'+_score+'个鸡翅分值，可以参与'+cjNumber+'次抽奖')
+						$(".model-mask .text").html('厉害了！你获得了'+_score+'个鸡翅分值，可以参与'+parent.cjNumber+'次抽奖')
 						$(".goNext").on('click',function(){
 							parent.swiper.slideNext()
 						});

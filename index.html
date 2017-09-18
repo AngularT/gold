@@ -25,7 +25,7 @@
 		<div id="body"></div>
 		<div class="swiper-container">
        	 	<div class="swiper-wrapper">
-	            <div class="swiper-slide">
+	            <div class="swiper-slide  swiper-no-swiping">
 	            	<div  class="model-index" style="width: 100%;height: 100%;position: relative;">
 	            		<div class="model-title"></div>
 	            		<div class="model-tong">
@@ -43,7 +43,7 @@
 	            		<div class="model-yun"></div>
 	            	</div>
 	            </div>
-	            <div class="swiper-slide">
+	            <div class="swiper-slide swiper-no-swiping">
 	            	<iframe src="drop.html" width="100%" height="100%" frameborder="0"></iframe>
 	            </div>
 	            <div class="swiper-slide">
@@ -62,7 +62,7 @@
 		        pagination: '.swiper-pagination',
 		        paginationClickable: true,
 		        direction: 'vertical',
-		        allowSwipeToPrev : false     //禁止上滑
+		        noSwiping : true
 		    });
 		    var cjNumber=0;   //抽奖次数
 		    var nextpage=0;
