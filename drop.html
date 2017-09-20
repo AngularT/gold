@@ -110,7 +110,7 @@
 					if(parent.cjNumber==1){
 						if(_score>20){
 							result();
-							$(".model-mask .text").html('厉害了！你获得了'+_score+'个鸡翅分值，但您只剩1次抽奖机会')
+							$(".model-mask .text").html('厉害了！你获得了'+_score+'个鸡翅分值，您还可以参与1次抽奖！')
 							$(".goNext").on('click',function(){
 								parent.swiper.slideNext();
 							});
@@ -119,7 +119,7 @@
 							});
 						}else if(_score>10){
 							result()
-							$(".model-mask .text").html('厉害了！你获得了'+_score+'个鸡翅分值，可以参与1次抽奖机会')
+							$(".model-mask .text").html('厉害了！你获得了'+_score+'个鸡翅分值，可以参与1次抽奖！')
 							$(".goNext").on('click',function(){
 								parent.swiper.slideNext();
 							});
@@ -137,7 +137,7 @@
 					}else if(parent.cjNumber==2){
 						if(_score>30){
 							result();
-							$(".model-mask .text").html('厉害了！你获得了'+_score+'个鸡翅分值，但您只剩2次抽奖机会')
+							$(".model-mask .text").html('厉害了！你获得了'+_score+'个鸡翅分值，您还可以参与2次抽奖！')
 							$(".goNext").on('click',function(){
 								parent.swiper.slideNext();
 							});
@@ -146,7 +146,7 @@
 							});
 						}else if(_score>20){
 							result()
-							$(".model-mask .text").html('厉害了！你获得了'+_score+'个鸡翅分值，可以参与2次抽奖机会')
+							$(".model-mask .text").html('厉害了！你获得了'+_score+'个鸡翅分值，可以参与2次抽奖！')
 							$(".goNext").on('click',function(){
 								parent.swiper.slideNext();
 							});
@@ -155,7 +155,7 @@
 							});
 						}else if(_score>10){
 							result()
-							$(".model-mask .text").html('厉害了！你获得了'+_score+'个鸡翅分值，可以参与1次抽奖机会')
+							$(".model-mask .text").html('厉害了！你获得了'+_score+'个鸡翅分值，可以参与1次抽奖！')
 							$(".goNext").on('click',function(){
 								parent.swiper.slideNext();
 								parent.cjNumber=1;
@@ -176,7 +176,7 @@
 							parent.cjNumber=parseInt(_score/10);
 							var strRule='<div class="gameOver" style="background-image: url('+arr[10]+');"><p class="text"></p><img class="again" src="'+arr[11]+'"/><img class="goNext" src="'+arr[12]+'"/></div>';
 							$mask.show().append(strRule);
-							$(".model-mask .text").html('厉害了！你获得了'+_score+'个鸡翅分值，可以参与'+parent.cjNumber+'次抽奖')
+							$(".model-mask .text").html('厉害了！你获得了'+_score+'个鸡翅分值，可以参与'+parent.cjNumber+'次抽奖！')
 							$(".goNext").on('click',function(){
 								parent.swiper.slideNext();
 							});

@@ -38,14 +38,17 @@ var turnplate={
 		'images/tshiwuUpan_03.jpg',
 		'images/tshiwuWanou_03.jpg',
 		'images/tnone_03.png',
-		'images/tnochance_03.png'
+		'images/tnochance_03.png',
+		'images/ruleBg_03.png'
 		]
 };
 $(document).ready(function(){
 	$(".model-bottomimg").height($("html").height()-$(".model-topimg").height());
 	$(".alert-quan").css('background-image','url('+turnplate.imgArr[3]+')');
 	$(".alert-shiwu").css('background-image','url('+turnplate.imgArr[4]+')');
-	$(".alert-none").css('background-image','url('+turnplate.imgArr[10]+')')
+	$(".alert-none").css('background-image','url('+turnplate.imgArr[10]+')');
+	$(".alert-ruleC").css('background-image','url('+turnplate.imgArr[12]+')')
+	$(".alert-ruleY").css('background-image','url('+turnplate.imgArr[12]+')')
 	var e=$("#aq-ma");
 	//动态添加大转盘的奖品与奖品区域背景颜色
 	turnplate.restaraunts = ["联想k歌宝", "优惠券", "谢谢参与","联想看家宝", "小新玩偶", "小新Air12","小新闪存盘"];
@@ -211,6 +214,32 @@ function drawRouletteWheel() {
 	<div class="alert-none">
 		<div class="none"><img src="images/t200btn_03.png"/></div>
 	</div>
+	<div class="alert-ruleC">
+		<img src="images/ruleCtit_03.png"/>
+		<p>1、活动时间：10.9-10.29<br />
+2、点击抽奖即有机会获取各类“小新·基”
+装备；<br />
+获得实物类奖品需填写收货地址和收货人信
+息，活动结束后工作人员会统一进行派送；
+实物奖品每个微信号仅限领奖一次。<br />
+优惠券类奖品每个微信号仅限领奖三次，奖
+品优惠券的使用有效期至2017年11月29日。</p>
+	</div>
+	<div class="alert-ruleY">
+		<img src="images/ruleYtit_03.png"/>
+		<p>使用时间：10.9-10.31<br />
+使用平台：联想商城小新铺子<br />
+使用金额及产品：<br />
+200元笔记本产品优惠码适用产品为：<br />
+10元周边产品优惠码使用产品为：<br />
+使用方式：通过本H5产品专区点击产品，或
+者在联想商城小新铺子内选择优惠码适用产
+品，加入购物车后，在订单页面→优惠信息
+→使用优惠码版块输入优惠码，点击使用即
+可。限制条件：优惠码不可叠加使用，每台
+商品最多使用一个优惠码；每个优惠码只能
+使用一次。</p>
+	</div>
 	<div class="model-topimg"></div>
 	<div class="model-bottomimg"></div>
 	<div class="model-name">
@@ -230,19 +259,12 @@ function drawRouletteWheel() {
 			<canvas class="item" id="wheelcanvas" width="422px" height="422px"></canvas>
 			<img class="pointer" src="images/p3-chou_03.png" alt=""/>
 		</div>
+		<div class="act-rules">
+			<img class="ar-c" src="images/ruleBtn_03.png" alt=""/>
+			<img class="ar-y" src="images/ruleBtn_05.png" alt=""/>
+		</div>
 	</div>
-	<div class="actRule">
-		<h4><img src="images/p3-ruleicon_03.png" alt="" width="14" height="14"/><span>抽奖活动规则</span></h4>
-		<p>
-			1、【活动时间】10.9-10.29<br />
-			<span style="display: inline-block;vertical-align: top;">2、</span><span style="display: inline-block;width: 92%;text-align: justify;">点击立即抽奖即有机会获取各类“小新·基 ”装备；
-			      获得实物类奖品需填写收货地址和收货人信息，活动
-			      结束后工作人员会统一进行派送；实物奖品每个微信
-			      号 仅限领奖一次。
-			      优惠券类奖品每个微信号仅限领奖三次，奖品优惠券
-			      的使用有效期至2017年11月29日。</span>
-		</p>
-	</div>
+	
 </body>
 <script type="text/javascript">
 	var tableSwiper = new Swiper('.swiper-container', {
@@ -251,6 +273,24 @@ function drawRouletteWheel() {
 		autoplay : 3000,
 		loop:true
 	});
+	$(".ar-c").on('click',function(){
+		$(".model-mask").show().addClass('ruleC');
+		$(".alert-ruleC").show();
+	})
+	$(".ar-y").on('click',function(){
+		$(".model-mask").show().addClass('ruleY');
+		$(".alert-ruleY").show();
+	})
+	$(".model-mask").on('click',function(e){
+		var x=event.target;
+		if(x.className=='model-mask ruleC'){
+			$(this).removeClass('ruleC').hide();
+			$(".alert-ruleC").hide();
+		}else if(x.className=='model-mask ruleY'){
+			$(this).removeClass('ruleY').hide();
+			$(".alert-ruleY").hide();
+		}
+	})
 </script>
 </html>
 
