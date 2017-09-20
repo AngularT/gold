@@ -57,7 +57,7 @@
 			$(".start-game").on('click',function(){
 				appendDrop();
 				requestAnimationFrame(dropAnimate);
-				countDown(30);
+				countDown(15);
 				$(".bottom").hide();
 				$("#bag").fadeIn(1000)
 			});
@@ -79,19 +79,21 @@
 //			生成下落物
 			function appendDrop(){
 				clearInterval(creatDrop);
+				var maxW=$("#top").width()-25;
 				creatDrop=setInterval(function(){
+						var dl=parseInt(Math.random()*(maxW-25+1)+25,10)
 						var i=parseInt(Math.random()*7);
 						var str=arr[i];
 						$("#top").append(str);
-						$(".drop:last").css("left",Math.random()*topWidth);
-				},1500);
+						$(".drop:last").css("left",dl);
+				},1000);
 			}
 			//下落动画
 			function dropAnimate(){
 				var _score=parseInt(scoreNum.html());
 				$(".drop").each(function(){
 					var j=parseInt($(this).css('top')+Math.random()*100)
-					j+=2;
+					j+=3;
 					$(this).css('top',j);
 					if(j>winHeight){
 						$(this).remove();
@@ -142,14 +144,16 @@
 			}
 //			下方篮子的移动
 			function boxMove(bagwrap,bag){
+				var maxLeft=$("#top").offset().left;
+				var maxRight=$("#top").width()+maxLeft;
 				bagwrap.on("touchstart",function(e){
 					var touch = e.originalEvent.targetTouches[0];
 					bag.css("left",touch.pageX-60);
-					if(touch.pageX<90){
-						bag.css("left",'0.3rem');
+					if(touch.pageX<maxLeft+60){
+						bag.css("left",maxLeft);
 					}
-					if(touch.pageX>282){
-						bag.css("left",'2.2rem');
+					if(touch.pageX>maxRight-60){
+						bag.css("left",maxRight-$("#bag").width());
 					};
 					return false;
 				})
@@ -157,11 +161,11 @@
 					var touch = e.originalEvent.targetTouches[0];
 					bag.css("left",touch.pageX-60);
 //					console.log(touch.pageX)
-					if(touch.pageX<90){
-						bag.css("left",'0.3rem');
+					if(touch.pageX<maxLeft+60){
+						bag.css("left",maxLeft);
 					}
-					if(touch.pageX>282){
-						bag.css("left",'2.2rem');
+					if(touch.pageX>maxRight-45){
+						bag.css("left",maxRight-$("#bag").width());
 					};
 					return false;
 				})
@@ -186,7 +190,7 @@
 					if(l>0&&r>0&&t>0){
 						if($(this).hasClass('person')){
 							$this.remove();
-							_score+=6;
+							_score+=5;
 							scoreNum.html(_score);
 						}else{
 							$this.remove();
@@ -216,7 +220,7 @@
 	<div class="model-mask"></div>
 	<div class="top-time">
 		<span id="scoreNum">0</span>
-		<span class="time">30</span>
+		<span class="time">20</span>
 	</div>
 	<!--<button class="start-game"><img src="images/"/></button>-->
 	<!--<button id="success" class="slide-next"></button>-->

@@ -70,6 +70,7 @@ html,body{height: 100%;}
 	display: block;
 	width: 0.3rem;
 	text-align: center;
+	font-weight: bold;
 }
 #scoreNum{
     left: 0.5rem;
@@ -135,9 +136,10 @@ html,body{height: 100%;}
 }
 #top{
 	position: relative;
-	width:2.7rem;
+	width:3.1rem;
 	margin: 0 auto;
 	height: 100%;
+	overflow: hidden;
 }
 #top .drop{
 	z-index: 99;

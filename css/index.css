@@ -240,11 +240,37 @@ animation-fill-mode: forwards;}
 
 
 
-
-
-
-
-
+/*商品列表页*/
+.model-shop{
+	width: 100%;
+	height: 100%;
+	background-image: url(../images/p4-bg.jpg);
+	background-size: 100% 100%;
+}
+.ms-title{
+	width: 2.18rem;
+	height: 0.51rem;
+	margin: 0 auto;
+	margin-top: 0.28rem;
+}
+.ms-list {
+	padding: 0 0.26rem;
+}
+.ms-list li{
+	width:1.55rem;
+	height: 1.06rem;
+	background-image: url(../images/p4-shopbg_03.png);
+	background-size: 100% 100%;
+}
+.ms-list ul{
+	margin-bottom:0.08rem;
+}
+.ms-list ul:first-child{
+	margin-top:0.32rem;
+}
+.ms-list li:first-child{
+	margin-right: 0.1rem;
+}
 
 
 
