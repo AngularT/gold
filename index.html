@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>联想&肯德基</title>
+		<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+		<link rel="stylesheet" href="css/swiper.min.css"/>
+		<link rel="stylesheet" type="text/css" href="css/index.css"/>
+		<script src="js/jquery-3.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/pace.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+		    function initScale(){
+			    var iWidth=document.documentElement.getBoundingClientRect().width;
+			    iWidth=iWidth>750?750:iWidth;
+			    document.getElementsByTagName("html")[0].style.fontSize=iWidth/3.75+"px";
+		    }
+		    window.onresize=function(){
+		        initScale();
+		    }
+		    initScale();
+		</script>
+	</head>
+	<body>
+		<div id="body"></div>
+		<div class="swiper-container">
+       	 	<div class="swiper-wrapper">
+	            <div class="swiper-slide  swiper-no-swiping">
+	            	<div  class="model-index" style="width: 100%;height: 100%;position: relative;">
+	            		<div class="model-title"></div>
+	            		<div class="model-tong">
+	            			<img class="mt-leg mt-leg1" src="images/p1-tui2_03.png" width="46" height="57" alt=""/>
+	            			<img class="mt-leg mt-leg2" src="images/p1-tui3_03.png" width="48" height="64" alt=""/>
+	            			<img class="mt-leg mt-leg3" src="images/p1-tui4_03.png" width="65" height="48" alt=""/>
+	            			<img class="mt-leg mt-leg4" src="images/p1-tui5_03.png" width="38" height="67" alt=""/>
+	            			<img class="mt-leg mt-leg5" src="images/p1-tui6_03.png" width="36" height="51" alt=""/>
+	            			<img class="mt-leg mt-leg6" src="images/p1-tui1_03.png" width="39" height="40" alt=""/>
+	            			<!--<div class="maplebg"></div>-->
+	            		</div>
+	            		<div class="model-person"></div>
+	            		<div class="model-word"><img src="images/p1-word_03.png" alt=""/></div>
+	            		<div class="slide-next"></div>
+	            		<div class="model-yun"></div>
+	            	</div>
+	            </div>
+	            <div class="swiper-slide swiper-no-swiping">
+	            	<iframe src="drop.html" width="100%" height="100%" frameborder="0"></iframe>
+	            </div>
+	            <div class="swiper-slide">
+	            	<iframe src="turntable.html" width="100%" height="100%" frameborder="0"></iframe>
+	            </div>
+	            <div class="swiper-slide">
+	            	<div class="model-shop">
+	            		<img src="images/p4-tit_03.png" class="ms-title"/>
+	            		<div class="ms-list">
+	            			<ul class="layout-tr">
+	            				<li class="layout-td"></li>
+	            				<li class="layout-td"></li>
+	            			</ul>
+	            			<ul class="layout-tr">
+	            				<li class="layout-td"></li>
+	            				<li class="layout-td"></li>
+	            			</ul>
+	            			<ul class="layout-tr">
+	            				<li class="layout-td"></li>
+	            				<li class="layout-td"></li>
+	            			</ul>
+	            			<ul class="layout-tr">
+	            				<li class="layout-td"></li>
+	            				<li class="layout-td"></li>
+	            			</ul>
+	            		</div>
+	            	</div>
+	            </div>
+        	</div>
+       </div>
+       <script src="js/index.js"></script>
+       <script src="js/swiper.min.js"></script>
+       <script type="text/javascript">
+			var swiper = new Swiper('.swiper-container', {
+		        pagination: '.swiper-pagination',
+		        paginationClickable: true,
+		        direction: 'vertical',
+		        noSwiping : true
+		    });
+		    var cjNumber=0;   //抽奖次数
+		    var nextpage=0;
+       </script>
+	</body>
+</html>

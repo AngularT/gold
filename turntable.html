@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>大转盘活动</title>
+<link rel="stylesheet" type="text/css" href="css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="css/turntable.css"/>
+<link rel="stylesheet" type="text/css" href="css/swiper.min.css"/>
+<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+<script src="js/swiper.min.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript" src="js/awardRotate.js"></script>
+<script type="text/javascript">
+    function initScale(){
+	    var iWidth=document.documentElement.getBoundingClientRect().width;
+	    iWidth=iWidth>750?750:iWidth;
+	    document.getElementsByTagName("html")[0].style.fontSize=iWidth/3.75+"px";
+    }
+    window.onresize=function(){
+        initScale();
+    }
+    initScale();
+</script>
+<script type="text/javascript">
+	
+var turnplate={
+		restaraunts:[],				//大转盘奖品名称
+		startAngle:0,				//开始角度
+		bRotate:false,				//false:停止;ture:旋转
+		imgArr:['images/p3-bg.jpg',
+		'images/p3-zhuanbg_03.png',
+		'images/p3-jiangpin_03.png',
+		'images/t200_03.png',
+		'images/tshiwu_03.png',
+		'images/tshiwuAir_03.jpg',
+		'images/tshiwuK_03.jpg',
+		'images/tshiwukanjia_03.jpg',
+		'images/tshiwuUpan_03.jpg',
+		'images/tshiwuWanou_03.jpg',
+		'images/tnone_03.png',
+		'images/tnochance_03.png'
+		]
+};
+$(document).ready(function(){
+	$(".model-bottomimg").height($("html").height()-$(".model-topimg").height());
+	$(".alert-quan").css('background-image','url('+turnplate.imgArr[3]+')');
+	$(".alert-shiwu").css('background-image','url('+turnplate.imgArr[4]+')');
+	$(".alert-none").css('background-image','url('+turnplate.imgArr[10]+')')
+	var e=$("#aq-ma");
+	//动态添加大转盘的奖品与奖品区域背景颜色
+	turnplate.restaraunts = ["联想k歌宝", "优惠券", "谢谢参与","联想看家宝", "小新玩偶", "小新Air12","小新闪存盘"];
+	turnplate.colors = ['#da000d'];
+	var rotateTimeOut = function (){
+		$('#wheelcanvas').rotate({
+			angle:0,
+			animateTo:2160,
+			duration:5000,
+			callback:function (){
+				alert('网络超时，请检查您的网络设置！');
+			}
+		});
+	};
+
+	//旋转转盘 item:奖品位置; txt：提示语;
+	var rotateFn = function (item, txt){
+		var angles = item * (360 / turnplate.restaraunts.length) - (360 / (turnplate.restaraunts.length*2));
+		if(angles<270){
+			angles = 270 - angles; 
+		}else{
+			angles = 360 - angles + 270;
+		}
+		$('#wheelcanvas').stopRotate();
+		$('#wheelcanvas').rotate({
+			angle:0,
+			animateTo:angles+1800,
+			duration:5000,
+			callback:function (){
+				if(item==2){
+					$(".model-mask").show();
+					$(".alert-quan").show();
+					var str='200元优惠码：'+$(".aq-two").val()+'    十元优惠码：'+$(".aq-ten").val();
+					e.html(str);
+					$(".aq-copy").click(function(){
+						var e=document.getElementById('aq-ma');
+						e.select();
+						tag=document.execCommand("Copy");
+						if(tag){  
+				          alert('复制内容成功');  
+				        }  
+					})
+					$(".aq-close").click(function(){
+						$(".model-mask").hide();
+						$(".alert-quan").hide();
+					})
+				}else if(item==1){
+					$(".model-mask").show();
+					$(".alert-shiwu").show();
+					$(".as-jp").text('联想k歌宝');
+					$(".ai-img").attr('src',turnplate.imgArr[6]).css({'width':'0.7rem','height':'1rem'})
+				}else if(item==3){          //谢谢参与
+					$(".model-mask").show();
+					$(".alert-none").show();
+					$(".none").click(function(){
+						$(".model-mask").hide();
+						$(".alert-none").hide();
+					})
+				}else if(item==4){
+					$(".model-mask").show();
+					$(".alert-shiwu").show();
+					$(".as-jp").text('联想看家宝');
+					$(".ai-img").attr('src',turnplate.imgArr[7]).css({'width':'0.73rem','height':'0.9rem'})
+				}else if(item==5){
+					$(".model-mask").show();
+					$(".alert-shiwu").show();
+					$(".as-jp").text('小新玩偶');
+					$(".ai-img").attr('src',turnplate.imgArr[9]).css({'width':'0.82rem','height':'1.01rem'})
+				}else if(item==6){
+					$(".model-mask").show();
+					$(".alert-shiwu").show();
+					$(".as-jp").text('小新Air12');
+					$(".ai-img").attr('src',turnplate.imgArr[5]).css({'width':'1.16rem','height':'0.91rem'})
+				}else if(item==7){
+					$(".model-mask").show();
+					$(".alert-shiwu").show();
+					$(".as-jp").text('小新闪存盘');
+					$(".ai-img").attr('src',turnplate.imgArr[8]).css({'width':'0.7rem','height':'1rem'})
+				}
+				$(".submit").click(function(){
+					if($("input.name").val()==0){
+						alert('请填写收货人姓名')
+					}else if($("input.tel").val()==0){
+						alert('请填写收货人电话')
+					}else if($("textarea.adress").val()==0){
+						alert('请填写收货人地址')
+					}else{
+						$(".model-mask").hide(300);
+						$(".alert-shiwu").hide(300);
+					}
+				})
+				turnplate.bRotate = !turnplate.bRotate;
+			}
+		});
+	};
+	var a=0;
+	$('.pointer').click(function (){
+		a++;
+		if(turnplate.bRotate)return;
+		turnplate.bRotate = !turnplate.bRotate;
+		var item = rnd(1,turnplate.restaraunts.length);
+		//奖品数量等于10,指针落在对应奖品区域的中心角度[252, 216, 180, 144, 108, 72, 36, 360, 324, 288]
+		rotateFn(item, turnplate.restaraunts[item-1]);       //奖品序号及弹出窗口内容
+		if(a==parent.cjNumber){
+			console.log('抽奖次数用完');
+			$(this).unbind('click');
+			$(this).on('click',function(){
+				$(".model-mask").show();
+				$(".alert-none").css('background-image','url('+turnplate.imgArr[11]+')')
+				$(".alert-none").show();
+				parent.swiper.slideNext();
+			})
+		}
+	});
+	
+});
+function rnd(n, m){
+	var random = Math.floor(Math.random()*(m-n+1)+n);
+	return random;
+	
+}
+//页面所有元素加载完毕后执行drawRouletteWheel()方法对转盘进行渲染
+window.onload=function(){
+	drawRouletteWheel();
+};
+
+function drawRouletteWheel() {    
+  var canvas = document.getElementById("wheelcanvas");    
+  if (canvas.getContext) {
+	  //根据奖品个数计算圆周角度
+	  var ctx = canvas.getContext("2d");
+	  var imgBg=document.getElementById('jiangpin');
+		  ctx.drawImage(imgBg,6,6); 
+  } 
+}
+</script>
+
+</head>
+<body style="position: relative;">
+	<div class="model-mask"></div>	
+	<div class="alert-quan">
+		<input type="text" class="aq-two" readonly style="border: none;" value="1"/>
+		<input type="text" class="aq-ten" readonly style="border: none;" value="2"/>
+		<textarea style="opacity: 0;position: absolute;z-index: -99;" id="aq-ma"></textarea>
+		<div class="aq-close"><img src="images/t200btn_03.png"/></div>
+		<div class="aq-copy"><img src="images/t200btn_07.png"/></div>
+	</div>
+	<div class="alert-shiwu">
+		<p class="as-tit">恭喜您获得了<span class="as-jp">联想小新闪存盘</span><br />
+		请填写以下信息便于实物奖品发放。
+		</p>
+		<div class="as-img">
+			<img class="ai-img" src="images/tshiwuUpan_03.jpg"/>
+			<span>(奖品图片)</span>
+		</div>
+		<label>姓名:<input type="text" class="name" name="" id="" value="" /></label>	<br />
+		<label>手机号:<input type="number" class="tel" name="" id="" value="" /></label>	<br />
+		<label>地址:<textarea type="text" class="adress" name="" id="" value=""></textarea></label>	
+		<div class="submit"><img src="images/tshiwuBtn_03.png"/></div>
+	</div>
+	<div class="alert-none">
+		<div class="none"><img src="images/t200btn_03.png"/></div>
+	</div>
+	<div class="model-topimg"></div>
+	<div class="model-bottomimg"></div>
+	<div class="model-name">
+		<span class="mn-tit">中奖名单：</span>
+		<div class="mn-list">
+			<div class="swiper-container">
+				<div class="swiper-wrapper">
+					<div class="swiper-slide"><p><span>张三：</span>/<span>奖品</span></p></div>
+					<div class="swiper-slide"><p><span>张三2：</span>/<span>奖品2</span></p></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<img src="images/p3-jiangpin_03.png" id="jiangpin" style="display:none;" />
+	<div class="banner">
+		<div class="turnplate" style="background-image: url(images/p3-zhuanbg_03.png);background-size:100% 100%;">
+			<canvas class="item" id="wheelcanvas" width="422px" height="422px"></canvas>
+			<img class="pointer" src="images/p3-chou_03.png" alt=""/>
+		</div>
+	</div>
+	<div class="actRule">
+		<h4><img src="images/p3-ruleicon_03.png" alt="" width="14" height="14"/><span>抽奖活动规则</span></h4>
+		<p>
+			1、【活动时间】10.9-10.29<br />
+			<span style="display: inline-block;vertical-align: top;">2、</span><span style="display: inline-block;width: 92%;text-align: justify;">点击立即抽奖即有机会获取各类“小新·基 ”装备；
+			      获得实物类奖品需填写收货地址和收货人信息，活动
+			      结束后工作人员会统一进行派送；实物奖品每个微信
+			      号 仅限领奖一次。
+			      优惠券类奖品每个微信号仅限领奖三次，奖品优惠券
+			      的使用有效期至2017年11月29日。</span>
+		</p>
+	</div>
+</body>
+<script type="text/javascript">
+	var tableSwiper = new Swiper('.swiper-container', {
+		pagination: '.swiper-pagination',
+		direction: 'vertical',
+		autoplay : 3000,
+		loop:true
+	});
+	
+</script>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

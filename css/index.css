@@ -1,0 +1,302 @@
+    html, body {
+        position: relative;
+        height: 100%;
+    }
+    body {
+        background: #eee;
+        font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        color:#000;
+        margin: 0;
+        padding: 0;
+    }
+    .swiper-container {
+        width: 100%;
+        height: 100%;
+    }
+    .swiper-slide {
+        text-align: center;
+        font-size: 18px;
+        background: #fff;
+
+        /* Center slide text vertically */
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+    }
+    /*进度条*/
+    /* This is a compiled file, you should be editing the file in the templates directory */
+   #body{width: 100%;height: 100%;background-image: url(../images/p0-bg.jpg);background-size: 100% 100%;}
+.pace {
+  -webkit-pointer-events: none;
+  pointer-events: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  z-index: 9999;
+  position: fixed;
+  margin: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height:0.26rem;
+  width: 3.14rem;
+  background: #89e3fe;
+  /*overflow: hidden;*/
+  border-radius: 12px;
+  border: 1px solid #000;
+}
+.pace .pace-progress {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+  position: fixed;
+  z-index: 9999;
+  display: block;
+  position: absolute;
+  top: 0;
+  height:0.24rem;
+  width: 100%;
+  max-width: 3.14rem;
+  background-color: #fff;
+  border-radius: 12px;
+}
+.pace .pace-progress:after{
+	content: "";
+	width: 0.69rem;
+	height: 0.93rem;
+	background-image:url(../images/p0-person_03.png);
+	background-size: 100% 100%;
+	position: absolute;
+	right: -0.2rem;
+	top: -0.7rem;
+	z-index: 99999;
+}
+.pace.pace-inactive,.pace-over{
+  display: none;
+}
+.pace-progress-inner{
+  height: 100%;
+  width: 100%;
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+}
+.pace-progress-inner:after{
+	content: "";
+	 height: 100%;
+	 width: 3.14rem;
+	 position: absolute;
+	 border-radius: 12px;
+	 z-index: 99999;
+	 background-image: url(../images/p0-loding_03.jpg);
+	 background-size: 100% 100%;
+}
+/*index*/
+.slide-next{
+	width: 1.62rem;
+	height: 0.68rem;
+	border: none;
+	position: absolute;
+	bottom: 0.7rem;
+	left: 50%;
+	margin-left: -0.81rem;
+	background-image: url(../images/page1_btn_07.png);
+	background-size: 100% 100%;
+	display: none;
+	z-index: 999;
+}
+
+.model-index{background-image: url(../images/p1-bg.jpg);background-position: top;background-size: 100% 100%;background-repeat: no-repeat;}
+.model-title{width:3.68rem;height: 1.56rem;background-image: url(../images/p1-title_03.png);background-size: 100% 100%;position: absolute;top: 0.08rem;left: 0.05rem;opacity: 0;}
+
+.model-yun{width: 100%;height: 2.52rem;position: absolute;bottom: 0;left: 0;background-image: url(../images/p1-bottom_02.png);background-size: 100% 100%;opacity: 0;}
+
+.model-person{width: 1.23rem;height: 2.19rem;position: absolute;bottom: 0.39rem;left: 0;background-image: url(../images/p1-ren_02.png);background-size: 100% 100%;z-index: 10;opacity: 0;}
+
+.model-word{width: 0;height:0.77rem;position: absolute;bottom: 2.35rem;left: 0.78rem;overflow: hidden;-webkit-animation-fill-mode: forwards;animation-fill-mode: forwards;}
+.model-word img{width: 1.26rem;height:0.77rem;}
+@keyframes wordShow{
+	from{width: 0;}
+	to{width: 1.26rem;}
+}
+
+.model-tong{width: 1.7rem;height: 1.7rem;background: url(../images/p1-tong_03.png) no-repeat center center/100%;transform: rotate(75deg);position: absolute;right: -0.5rem;top: 2.3rem;-webkit-transform-origin:  right top;transform-origin: right top;z-index: 999;opacity: 0;}
+.tong-animate{
+-webkit-animation: tongRotate 1s 1s linear ;
+animation: tongRotate 1s 1s ease-out;
+-webkit-animation-fill-mode: forwards;
+animation-fill-mode: forwards;opacity: 0;}
+@-webkit-keyframes  tongRotate{
+	0%{transform: rotate(75deg);opacity: .3;right: -0.5rem;top: 2.6rem;}
+	50%{transform: rotate(75deg);opacity: 1;right: -0.5rem;top: 2.6rem;}
+	100%{transform: rotate(0deg);top: 1.27rem;right: -0.2rem;opacity: 1;}
+}
+@keyframes tongRotate{
+	0%{transform: rotate(75deg);opacity: .3;right: -0.5rem;top: 2.6rem;}
+	50%{transform: rotate(75deg);opacity: 1;right: -0.5rem;top: 2.6rem;}
+	100%{transform: rotate(0deg);top: 1.27rem;right: -0.2rem;opacity: 1;}
+}
+.mt-leg{position: absolute;top:0.7rem;right:0.9rem;opacity: 0;}
+.over1{top:0.2rem;right:2.1rem;opacity: 1;}
+.over2{top:1.1rem;right:3.2rem;opacity: 1;}
+.over3{top:1.1rem;right:1.8rem;opacity: 1;}
+.over4{top:1.9rem;right:1.4rem;opacity: 1;}
+.over5{top:2.2rem;right:0.6rem;opacity: 1;}
+.over6{top:3.2rem;right:0.8rem;opacity: 1;}
+.tong-animate .mt-leg1{
+-webkit-animation: legFly1 0.9s  1.8s ease-out ;
+animation: legFly1 0.9s  1.8s ease-out;
+-webkit-animation-fill-mode: forwards;
+animation-fill-mode: forwards;
+}
+@-webkit-keyframes legFly1{
+	from{top:0.7rem;right:0.9rem;opacity: 1;}
+	to{top:0.2rem;right:2.1rem;opacity: 1;}
+}
+@keyframes legFly1{
+	from{top:0.7rem;right:0.9rem;opacity: 1;}
+	to{top:0.2rem;right:2.1rem;opacity: 1;}
+}
+.tong-animate .mt-leg2{
+-webkit-animation: legFly2 0.9s  1.5s ease-out ;
+animation: legFly2 0.9s 1.5s ease-out;
+-webkit-animation-fill-mode: forwards;
+animation-fill-mode: forwards;}
+@-webkit-keyframes legFly2{
+	from{top:0.7rem;right:0.9rem;opacity: 1;}
+	to{top:1.1rem;right:3.2rem;opacity: 1;}
+}
+@keyframes legFly2{
+	from{top:0.7rem;right:0.9rem;opacity: 1;}
+	to{top:1.1rem;right:3.2rem;opacity: 1;}
+}
+
+.tong-animate .mt-leg3{
+-webkit-animation: legFly3 0.9s  1.5s ease-out ;
+animation: legFly3 0.9s 1.5s ease-out;
+-webkit-animation-fill-mode: forwards;
+animation-fill-mode: forwards;}
+@-webkit-keyframes legFly3{
+	from{top:0.7rem;right:0.9rem;opacity: 1;}
+	to{top:1.1rem;right:1.8rem;opacity: 1;}
+}
+@keyframes legFly3{
+	from{top:0.7rem;right:0.9rem;opacity: 1;}
+	to{top:1.1rem;right:1.8rem;opacity: 1;}
+}
+.tong-animate .mt-leg4{
+-webkit-animation: legFly4 0.9s  1.5s ease-out ;
+animation: legFly4 0.9s 1.5s ease-out;
+-webkit-animation-fill-mode: forwards;
+animation-fill-mode: forwards;}
+@-webkit-keyframes legFly4{
+	from{top:0.7rem;right:0.9rem;opacity: 1;}
+	to{top:1.9rem;right:1.4rem;opacity: 1;}
+}
+@keyframes legFly4{
+	from{top:0.7rem;right:0.9rem;opacity: 1;}
+	to{top:1.9rem;right:1.4rem;opacity: 1;}
+}
+.tong-animate .mt-leg5{
+-webkit-animation: legFly5 0.9s  1.8s ease-out ;
+animation: legFly5 0.9s 1.8s ease-out;
+-webkit-animation-fill-mode: forwards;
+animation-fill-mode: forwards;}
+@-webkit-keyframes legFly5{
+	from{top:0.7rem;right:0.9rem;opacity: 1;}
+	to{top:2.2rem;right:0.6rem;opacity: 1;}
+}
+@keyframes legFly5{
+	from{top:0.7rem;right:0.9rem;opacity: 1;}
+	to{top:2.2rem;right:0.6rem;opacity: 1;}
+}
+.tong-animate .mt-leg6{
+-webkit-animation: legFly6 0.9s  1.8s ease-out ;
+animation: legFly6 0.9s 1.8s ease-out;
+-webkit-animation-fill-mode: forwards;
+animation-fill-mode: forwards;}
+@-webkit-keyframes legFly6{
+	from{top:0.7rem;right:0.9rem;opacity: 1;}
+	to{top:3.2rem;right:0.8rem;opacity: 1;}
+}
+@keyframes legFly6{
+	from{top:0.7rem;right:0.9rem;opacity: 1;}
+	to{top:3.2rem;right:0.8rem;opacity: 1;}
+}
+
+
+
+/*商品列表页*/
+.model-shop{
+	width: 100%;
+	height: 100%;
+	background-image: url(../images/p4-bg.jpg);
+	background-size: 100% 100%;
+}
+.ms-title{
+	width: 2.18rem;
+	height: 0.51rem;
+	margin: 0 auto;
+	margin-top: 0.28rem;
+}
+.ms-list {
+	padding: 0 0.26rem;
+}
+.ms-list li{
+	width:1.55rem;
+	height: 1.06rem;
+	background-image: url(../images/p4-shopbg_03.png);
+	background-size: 100% 100%;
+}
+.ms-list ul{
+	margin-bottom:0.08rem;
+}
+.ms-list ul:first-child{
+	margin-top:0.32rem;
+}
+.ms-list li:first-child{
+	margin-right: 0.1rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
