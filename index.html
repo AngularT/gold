@@ -8,7 +8,7 @@
 		<link rel="stylesheet" href="css/swiper.min.css"/>
 		<link rel="stylesheet" type="text/css" href="css/index.css"/>
 		<script src="js/jquery-3.1.1.min.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/pace.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/pace.min.js" defer="defer" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
 		    function initScale(){
 			    var iWidth=document.documentElement.getBoundingClientRect().width;
@@ -35,7 +35,6 @@
 	            			<img class="mt-leg mt-leg4" src="images/p1-tui5_03.png" width="38" height="67" alt=""/>
 	            			<img class="mt-leg mt-leg5" src="images/p1-tui6_03.png" width="36" height="51" alt=""/>
 	            			<img class="mt-leg mt-leg6" src="images/p1-tui1_03.png" width="39" height="40" alt=""/>
-	            			<!--<div class="maplebg"></div>-->
 	            		</div>
 	            		<div class="model-person"></div>
 	            		<div class="model-word"><img src="images/p1-word_03.png" alt=""/></div>
@@ -46,10 +45,10 @@
 	            <div class="swiper-slide swiper-no-swiping">
 	            	<iframe src="drop.html" width="100%" height="100%" frameborder="0"></iframe>
 	            </div>
-	            <div class="swiper-slide">
+	            <div class="swiper-slide swiper-no-swiping">
 	            	<iframe src="turntable.html" width="100%" height="100%" frameborder="0"></iframe>
 	            </div>
-	            <div class="swiper-slide">
+	            <div class="swiper-slide swiper-no-swiping">
 	            	<div class="model-shop">
 	            		<img src="images/p4-tit_03.png" class="ms-title"/>
 	            		<div class="ms-list">
@@ -81,10 +80,10 @@
 		        pagination: '.swiper-pagination',
 		        paginationClickable: true,
 		        direction: 'vertical',
-		        noSwiping : true
+		        noSwiping : true,
+		        speed:800
 		    });
 		    var cjNumber=0;   //抽奖次数
-		    var nextpage=0;
        </script>
 	</body>
 </html>

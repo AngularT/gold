@@ -21,8 +21,10 @@
 		</script>
 	<script type="text/javascript">
 		$(function(){
+			parent.cjNumber=3;
 			window.requestAnimationFrame= window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
 			var i=0;
+			var x=0;   //小新出现的次数
 			var creatDrop=null;
 			var $bag=$("#bag"),
 				$bottomBox=$("#bottom-box"),
@@ -73,9 +75,9 @@
 //			生成下落物
 			function appendDrop(){
 				clearInterval(creatDrop);
-				var maxW=$("#top").width()-25;
+				var maxW=$("#top").width()-30;
 				creatDrop=setInterval(function(){
-						var dl=parseInt(Math.random()*(maxW-25+1)+25,10)
+						var dl=parseInt(Math.random()*(maxW-30+1)+30,10)
 						var i=parseInt(Math.random()*7);
 						var str=arr[i];
 						$("#top").append(str);
@@ -87,7 +89,7 @@
 				var _score=parseInt(scoreNum.html());
 				$(".drop").each(function(){
 					var j=parseInt($(this).css('top')+Math.random()*100)
-					j+=3;
+					j+=4;
 					$(this).css('top',j);
 					if(j>winHeight){
 						$(this).remove();
@@ -104,27 +106,106 @@
 			function timeOver(_score){
 					window.cancelAnimationFrame(dropAnimate);
 					$('.drop').hide();
-					
 					clearInterval(creatDrop);
-					if(_score>10){
-						parent.cjNumber=parseInt(_score/10);
-						var strRule='<div class="gameOver" style="background-image: url('+arr[10]+');"><p class="text"></p><img class="again" src="'+arr[11]+'"/><img class="goNext" src="'+arr[12]+'"/></div>';
-						$mask.show().append(strRule);
-						$(".model-mask .text").html('厉害了！你获得了'+_score+'个鸡翅分值，可以参与'+parent.cjNumber+'次抽奖')
-						$(".goNext").on('click',function(){
-							parent.swiper.slideNext()
-						});
-						$(".again").on('click',function(){
-							location.reload() 
-						});
-					}else{
+					if(parent.cjNumber==1){
+						if(_score>20){
+							result();
+							$(".model-mask .text").html('厉害了！你获得了'+_score+'个鸡翅分值，但您只剩1次抽奖机会')
+							$(".goNext").on('click',function(){
+								parent.swiper.slideNext();
+							});
+							$(".again").on('click',function(){
+								location.reload();
+							});
+						}else if(_score>10){
+							result()
+							$(".model-mask .text").html('厉害了！你获得了'+_score+'个鸡翅分值，可以参与1次抽奖机会')
+							$(".goNext").on('click',function(){
+								parent.swiper.slideNext();
+							});
+							$(".again").on('click',function(){
+								location.reload();
+							});
+						}else if(_score<10){
+							var strRule='<div class="gameOver" style="background-image: url('+arr[10]+');"><p class="text"></p><img class="again" src="'+arr[11]+'"/></div>';
+							$mask.show().append(strRule);
+							$(".model-mask .text").html('手残党，你只获得了'+_score+'个鸡翅分值，再玩一次？')
+							$(".again").on('click',function(){
+								location.reload();
+							}).css('left','1.07rem');
+						}
+					}else if(parent.cjNumber==2){
+						if(_score>30){
+							result();
+							$(".model-mask .text").html('厉害了！你获得了'+_score+'个鸡翅分值，但您只剩2次抽奖机会')
+							$(".goNext").on('click',function(){
+								parent.swiper.slideNext();
+							});
+							$(".again").on('click',function(){
+								location.reload();
+							});
+						}else if(_score>20){
+							result()
+							$(".model-mask .text").html('厉害了！你获得了'+_score+'个鸡翅分值，可以参与2次抽奖机会')
+							$(".goNext").on('click',function(){
+								parent.swiper.slideNext();
+							});
+							$(".again").on('click',function(){
+								location.reload();
+							});
+						}else if(_score>10){
+							result()
+							$(".model-mask .text").html('厉害了！你获得了'+_score+'个鸡翅分值，可以参与1次抽奖机会')
+							$(".goNext").on('click',function(){
+								parent.swiper.slideNext();
+								parent.cjNumber=1;
+							});
+							$(".again").on('click',function(){
+								location.reload();
+							});
+						}else if(_score<10){
+							var strRule='<div class="gameOver" style="background-image: url('+arr[10]+');"><p class="text"></p><img class="again" src="'+arr[11]+'"/></div>';
+							$mask.show().append(strRule);
+							$(".model-mask .text").html('手残党，你只获得了'+_score+'个鸡翅分值，再玩一次？')
+							$(".again").on('click',function(){
+								location.reload();
+							}).css('left','1.07rem');
+						}
+					}else if(parent.cjNumber==3){
+						if(_score>10){
+							parent.cjNumber=parseInt(_score/10);
+							var strRule='<div class="gameOver" style="background-image: url('+arr[10]+');"><p class="text"></p><img class="again" src="'+arr[11]+'"/><img class="goNext" src="'+arr[12]+'"/></div>';
+							$mask.show().append(strRule);
+							$(".model-mask .text").html('厉害了！你获得了'+_score+'个鸡翅分值，可以参与'+parent.cjNumber+'次抽奖')
+							$(".goNext").on('click',function(){
+								parent.swiper.slideNext();
+							});
+							$(".again").on('click',function(){
+								location.reload();
+								parent.cjNumber=3;
+							});
+						}else{
+							var strRule='<div class="gameOver" style="background-image: url('+arr[10]+');"><p class="text"></p><img class="again" src="'+arr[11]+'"/></div>';
+							$mask.show().append(strRule);
+							$(".model-mask .text").html('手残党，你只获得了'+_score+'个鸡翅分值，再玩一次？')
+							$(".again").on('click',function(){
+								location.reload();
+							}).css('left','1.07rem');
+						}
+					}else if(parent.cjNumber==0){
 						var strRule='<div class="gameOver" style="background-image: url('+arr[10]+');"><p class="text"></p><img class="again" src="'+arr[11]+'"/></div>';
 						$mask.show().append(strRule);
-						$(".model-mask .text").html('手残党，你只获得了'+_score+'个鸡翅分值，再玩一次？')
+						$(".model-mask .text").html('厉害了！你获得了'+_score+'个鸡翅分值,但您的抽奖机会已用完，快邀请好友一起来吧！')
 						$(".again").on('click',function(){
-							location.reload() 
+							location.reload();
+							parent.cjNumber=0;
 						}).css('left','1.07rem');
 					}
+					
+			}
+			function result(){
+				var strRule='<div class="gameOver" style="background-image: url('+arr[10]+');"><p class="text"></p><img class="again" src="'+arr[11]+'"/><img class="goNext" src="'+arr[12]+'"/></div>';
+				$mask.show().append(strRule);
 			}
 //			下方篮子的移动
 			function boxMove(bagwrap,bag){
@@ -147,7 +228,7 @@
 					if(touch.pageX<maxLeft+60){
 						bag.css("left",maxLeft);
 					}
-					if(touch.pageX>maxRight-45){
+					if(touch.pageX>maxRight-55){
 						bag.css("left",maxRight-$("#bag").width());
 					};
 					return false;
@@ -165,16 +246,20 @@
 					    dropRight=winWidth-dropLeft-$this.width(),     //金币右边距
 					    dropTop=$this.offset().top+$this.height(),     //金币上边距
 						bagTop=$bag.offset().top+40;                    //篮子上边距
-						bagLeft=$bag.offset().left+30;                  //篮子左边距
+						bagLeft=$bag.offset().left+20;                  //篮子左边距
 						bagRight=winWidth-bagLeft-$bag.width();      //篮子右边距
 					var l=Math.round(dropLeft-bagLeft),
 						r=Math.round(dropRight-bagRight),
 						t=Math.round(dropTop-bagTop)
 					if(l>0&&r>0&&t>0){
 						if($(this).hasClass('person')){
+							x++;
 							$this.remove();
 							_score+=5;
 							scoreNum.html(_score);
+							if(x==3||x>3){
+								arr[6]="<img class='drop' src='images/p1-tui5_03.png'/>";
+							}
 						}else{
 							$this.remove();
 							_score++;
@@ -183,7 +268,6 @@
 					}
 				})
 			}
-			
 			$(".model-yun").on('click',function(){
 			var strRule='<img class="rules" src="'+arr[9]+'">';
 			$(".model-mask").show().addClass('ruleBg').append(strRule);

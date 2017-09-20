@@ -156,7 +156,9 @@ $(document).ready(function(){
 				$(".model-mask").show();
 				$(".alert-none").css('background-image','url('+turnplate.imgArr[11]+')')
 				$(".alert-none").show();
-				parent.swiper.slideNext();
+				setTimeout(function(){
+					parent.swiper.slideNext();
+				},800)
 			})
 		}
 	});
@@ -216,8 +218,8 @@ function drawRouletteWheel() {
 		<div class="mn-list">
 			<div class="swiper-container">
 				<div class="swiper-wrapper">
-					<div class="swiper-slide"><p><span>张三：</span>/<span>奖品</span></p></div>
-					<div class="swiper-slide"><p><span>张三2：</span>/<span>奖品2</span></p></div>
+					<div class="swiper-slide"><p><span>张三</span>获得了<span>奖品</span></p></div>
+					<div class="swiper-slide"><p><span>张三2</span>获得了<span>奖品2</span></p></div>
 				</div>
 			</div>
 		</div>
@@ -249,7 +251,6 @@ function drawRouletteWheel() {
 		autoplay : 3000,
 		loop:true
 	});
-	
 </script>
 </html>
 
